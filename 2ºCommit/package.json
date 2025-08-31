@@ -14,5 +14,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./",
     "start:dev": "nodemon"
+  },
+  "dependencies": {
+    "sequelize": "^6.37.7",
+    "sqlite3": "^5.1.7"
   }
 }
