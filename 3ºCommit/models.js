@@ -68,7 +68,7 @@ export async function atualizaProdutoPorId(id, dadosProduto) {
             resultado[chave] = dadosProduto[chave]
            }
        }
-    resultado.save(); /*para persistir essas alterações no banco*/
+    await resultado.save(); /*para persistir essas alterações no banco*/
     console.log(`Produto atualizado com sucesso!`, resultado);
     }
     return resultado;
@@ -79,14 +79,15 @@ export async function atualizaProdutoPorId(id, dadosProduto) {
    }
 }
 
-export async function deletaProdutoPorId(id) { 
-   try {
-    const resultado = await Produto.destroy({where: {id:id}}) /*queremos buscar pelo id utilizando o id q recebemos por parametro na chamada da função */
-    console.log(`Produto deletado com sucesso!`, resultado);
-   } catch(erro){
+export async function deletaProdutoPorId(id) {
+  try {
+    const resultado = await Produto.destroy({ where: { id: id } });
+    console.log('Produto deletado com sucesso!', resultado);
+    return resultado > 0; // true se deletou, false se não encontrou
+  } catch (erro) {
     console.log('Erro ao deletar produto', erro);
     throw erro;
-   }
+  }
 }
 
 export const Pedido = sequelize.define('pedido', { /*novo*/
